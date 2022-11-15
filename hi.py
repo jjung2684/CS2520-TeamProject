@@ -159,9 +159,6 @@ def menu():
 def main():
     studentList = []
     studentCounter = 0
-    continueFlag = True
-    newStudentFlag = True
-    newTakeFlag = True
     
     print("Welcome to XYZ test taking system")
 
