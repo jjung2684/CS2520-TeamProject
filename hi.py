@@ -3,7 +3,6 @@
 
 import random
 
-
 class Students:
     def __init__(self, name, student_id):
         self.name = name
@@ -18,8 +17,7 @@ class Students:
             self.high_score = self.cur_score
 
     def display_scores(self):
-        print("Current score: ", self.cur_score, "High score: ", self.high_score)
-
+        print("Current score:", self.cur_score, "\tHigh score:", self.high_score)
 
 class Quiz:
     def __init__(self, student):
@@ -149,7 +147,61 @@ class Quiz:
         quiz_taking_student.update_score(correct_answer)
 
 
-student1 = Students("Jacob Jung", 1234567890)
-quiz = Quiz(student1)
-quiz.question(student1)
-student1.display_scores()
+def menu():
+    print("Select an option:")
+    print("1. Take the test as a new student")
+    print("2. Print test statistics")
+    print("3. Retake the test")
+    print("4. End session")
+    userInput = int(input("Your choice: "))
+    return userInput
+
+def main():
+    studentList = []
+    studentCounter = 0
+    continueFlag = True
+    newStudentFlag = True
+    newTakeFlag = True
+    
+    print("Welcome to XYZ test taking system")
+
+    while True:
+        print("\nSelect an option:")
+        print("1. Take the test as a new student")
+        print("2. Print test statistics")
+        print("3. Retake the test")
+        print("4. End session")
+        option = int(input("Your choice: "))
+
+        if option == 4:
+            print("\nSession ended successfully.")
+            break
+        elif option == 1:
+            userInput = input("\nPlease provide your name and student ID to take the test: ").split()
+            studentList.append(Students(userInput[0], int(userInput[1])))
+            quiz = Quiz(studentList[studentCounter])
+            quiz.question(studentList[studentCounter])
+            studentList[studentCounter].display_scores()
+            studentCounter += 1
+        elif option == 3:
+            if studentCounter == 0:
+                print("\nYou need to take the test as a new student first!")
+            else:
+                studentCounter -= 1
+                quiz = Quiz(studentList[studentCounter])
+                quiz.question(studentList[studentCounter])
+                studentList[studentCounter].display_scores()
+                studentCounter += 1
+        elif option == 2:
+            if studentCounter == 0:
+                print("\nNo statistics to show!")
+            else:
+                sum = 0
+                print("\nStudents who have taken the test:")
+                for i in range(len(studentList)):
+                    print(str(getattr(studentList[i],'name')) + " #" + str(getattr(studentList[i],'student_id')) + ":", getattr(studentList[i],'high_score'))
+                    sum += getattr(studentList[i],'high_score')
+                print("Average score:", round(sum/len(studentList),2))
+        
+if __name__=="__main__":
+    main()
