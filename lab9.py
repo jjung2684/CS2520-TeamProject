@@ -131,19 +131,25 @@ class Quiz:
 
     def question(self, quiz_taking_student):
         self.quiz_taking_student = quiz_taking_student
+        correct_answer = 0
 
-        q = random.choice(self.question_bank)
-        print("\nQuestion:", q.get('question', 'choices'))
+        for q in random.sample(self.question_bank, 5):
+            print("\nQuestion:", q.get('question', 'choices'))
 
-        answer = input("{} \ntype your answer: ".format(q.get('choices')).lower())
+            answer = input("{} \ntype your answer: ".format(q.get('choices')).lower())
 
-        if answer == q.get('answer'):
-            print("Correct!")
+            if answer == q.get('answer'):
+                print("Correct!")
+                correct_answer += 1
 
-        else:
-            print("Wrong!")
+            else:
+                print("Wrong!")
+
+        print("\nYou got {} / 5 questions right ".format(correct_answer))
+        quiz_taking_student.update_score(correct_answer)
 
 
 student1 = Students("Jacob Jung", 1234567890)
 quiz = Quiz(student1)
 quiz.question(student1)
+student1.display_scores()
