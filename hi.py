@@ -146,16 +146,6 @@ class Quiz:
         print("\nYou got {} / 5 questions right ".format(correct_answer))
         quiz_taking_student.update_score(correct_answer)
 
-
-def menu():
-    print("Select an option:")
-    print("1. Take the test as a new student")
-    print("2. Print test statistics")
-    print("3. Retake the test")
-    print("4. End session")
-    userInput = int(input("Your choice: "))
-    return userInput
-
 def main():
     studentList = []
     studentCounter = 0
