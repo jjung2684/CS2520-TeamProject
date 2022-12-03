@@ -5,6 +5,7 @@ import customtkinter
 import csv
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as soup
+from PIL import ImageTk, Image
 import requests
 import os
 
@@ -85,9 +86,16 @@ customtkinter.set_default_color_theme("dark-blue")  # Themes: blue (default), da
 
 root = customtkinter.CTk()
 root.title("Newegg Scraper")
-root.geometry("500x100")
+root.geometry("500x400")
 root.resizable(False, False)
 root.eval("tk::PlaceWindow . center")
+
+frame = Frame(root, width = 256, height=256)
+frame.pack()
+frame.place(anchor="center", relx=0.5, rely=0.5)
+img = ImageTk.PhotoImage(Image.open("logo.png"))
+label = Label(frame, image = img, bg='#1a1a1a')
+label.pack()
 
 box = customtkinter.CTkFrame(root, corner_radius = 10)
 box.pack(pady = 20)
