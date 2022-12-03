@@ -3,16 +3,16 @@
 import datetime
 import requests as requests
 from bs4 import BeautifulSoup
+from time import sleep
 
 time = datetime.datetime.now()
 current_time = time.strftime("Current date and time is %Y/%m/%d %H:%M.")
-print("\n   CS 2520 Web Scraping Project    \n")
+print("\n=======CS 2520 Web Scraping Project=======\n")
 print("Hello User, ")
-print(current_time)
+print("Current time is: ", current_time)
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 " \
-             "Safari/537.36 "   # Needed to help servers distinguish from human users and bots; if we don't specify, no
-                                # data is retrieved
+             "Safari/537.36 "
 LANGUAGE = "en-US,en;q=0.5"
 session = requests.Session()
 session.headers["User-Agent"] = USER_AGENT
@@ -35,6 +35,14 @@ print("Current temperature is {} °F.\n".format(weather_result["temp_now"]))
 cpp_url = "https://www.cpp.edu/"
 cpp_html = session.get(cpp_url)
 cpp_soup = BeautifulSoup(cpp_html.text, "html.parser")
+
+print("Retrieving News From the CPP Website: ")
+print(".")
+sleep(2)
+print(".")
+sleep(2)
+print(".")
+sleep(2)
 
 print("Here are current news headlines from {}:\n".format(cpp_url))
 
